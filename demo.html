@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+</head>
+
+<body> 
+    <style>
+      
+    
+        .container {
+            text-align: center;
+        }
+    
+        table {
+            margin: 0 auto;
+        }
+    </style>
+
+    <div class="container">
+
+    <h1>STUDENT FORM</h1>
+    <form id="studentForm">
+        <table border="1" style="padding: 5px;">
+            <tr>
+                <th>Name</th>
+                <td>
+                    <input type="text" id="name" required>
+                </td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>
+                    <input type="number" id="age" required>
+                </td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>
+                    <label>
+                        <input type="radio" name="gender" value="Male" required>Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Female">Female
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th>Course</th>
+                <td>
+                    <select style="width: 100%;" id="course" required>
+                        <option>JavaScript</option>
+                        <option>Python</option>
+                        <option>SQL</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    <input type="text" id="email" required>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <button type="submit" class="btn"
+                        style="background-color: lightblue;width: 100%;padding: 5px;">Save</button>
+                </th>
+            </tr>
+
+        </table>
+    </form>
+    <br>
+
+    <table border="1" id="studentTable">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Course</th>
+            <th>Gender</th>
+            <th>E-mail</th>
+            <th>Action</th>
+        </tr>
+    </table>
+</div>
+    
+
+    <script>
+        
+        var form = document.getElementById("studentForm");
+        var table = document.getElementById("studentTable");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const course = document.getElementById("course").value;
+            const email = document.getElementById("email").value;
+
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td>${age}</td>
+                <td>${course}</td>
+                <td>${gender}</td>
+                <td>${email}</td>
+                <td><button onclick="deleteRow(this)">Delete</button></td>
+            `;
+
+            form.reset();
+        });
+
+        function deleteRow(button) {
+            const row = button.closest("tr");
+            row.remove();
+        }
+
+        //notes:
+
+        //1)radio → oru option select panna
+        //2)name → ella options um oru group nu solla
+        //3)value → select panna value ah backend ku anuppa
+        //4)required → oru gender select panna kattanama solla
+        //5)event&preventdefault->event nu irukkura object-la preventDefault() nu oru method irukku.
+         //Ithu default behavior-a stop pannudhu.
+         // Inga "default behavior" na form submit aagiradhu + page reload aagiradhu.
+         //So, preventDefault() use pannina:
+         //Form submit aagathu
+         //Page reload aagathu
+         //Neenga JavaScript la custom-a handle panna mudiyum (e.g. validate panna, save panna, show alert, etc.)
+        //6)Const-> Value once assign pannina adha thaan use panna porom nu solid-a solla
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
